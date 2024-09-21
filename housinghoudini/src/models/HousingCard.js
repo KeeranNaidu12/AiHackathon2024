@@ -1,5 +1,7 @@
+//This is an Object class for our Housingcard Object
 class HousingCard {
     constructor(title, price, location, bedrooms, bathrooms, pets, descriptions, furnished) {
+        //These are variable that will help the user determine which rental they want
         this.title = title;
         this.price = price;
         this.location = location;
@@ -11,7 +13,7 @@ class HousingCard {
         this.img = new Image();
         this.match = 0.0;
     }
-
+//With the help of Copilot, I implemneted setters and getters for each attribute
     setTitle(newTitle) {
         this.title = newTitle;
     }
