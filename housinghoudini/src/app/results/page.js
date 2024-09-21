@@ -1,10 +1,11 @@
 import React from "react";
-
-function Test(){
-    return(<div>
-    Hello World
-
-    </div>);
+function Results(){
+  return(
+  <div>
+    <Header/>
+  <ResultsOutput/>
+  <Footer/>
+  </div>);
 }
 
-export default Test;
+export default Results; 
