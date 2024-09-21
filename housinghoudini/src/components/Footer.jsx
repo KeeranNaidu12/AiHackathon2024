@@ -8,18 +8,20 @@ const footerStyle = { // Temp style
   textAlign: "center",
   position: "fixed",
   display: "flex", 
+  flexDirection: "column",
   alignItems: "center", 
   justifyContent: "center",
   left: "0",
   bottom: "0",
   width: "100%",
-  height: "60px",
+  height: "15%",
 };
 
 function Footer() {  
   return (
     <div style={footerStyle}>
-      <h1>© Software Name {year}</h1>
+      <p>© Software Name {year}</p>
+      <p>AI for Social Good Hackathon | Algorithm Avengers</p>
     </div>
   );
 }
