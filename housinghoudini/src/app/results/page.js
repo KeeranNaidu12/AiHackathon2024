@@ -3,7 +3,7 @@ function Results(){
   return(
   <div>
     <Header/>
-  <ResultsOutput/>
+   <ResultsOutput/>
   <Footer/>
   </div>);
 }
