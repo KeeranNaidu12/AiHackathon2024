@@ -8,6 +8,7 @@ class HousingCard {
         this.bedrooms = bedrooms;
         this.bathrooms = bathrooms;
         this.pets = pets;
+        this.laundry = laundry;
         this.descriptions = descriptions;
         this.furnished = furnished;
         this.img = new Image();
@@ -92,5 +93,13 @@ class HousingCard {
 
     getImage() {
         return this.img.src;
+    }
+
+    setLaundry(laundry){
+        this.laundry = laundry;
+    }
+
+    getLaundry(){
+        return this.laundry;
     }
 }

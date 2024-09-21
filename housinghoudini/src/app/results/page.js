@@ -1,9 +1,11 @@
 import React from "react";
+import ResultsOutput from "./ResultsOutput";
+
 function Results(){
   return(
   <div>
     <Header/>
-   <ResultsOutput/>
+   <ResultsOutput housingdata={housingData}/>
   <Footer/>
   </div>);
 }
