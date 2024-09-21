@@ -3,14 +3,10 @@ import React from 'react';
 import Header from '@/components/Header';
 import UserDataForm from '@/components/UserDataForm';
 import Footer from '@/components/Footer';
-import { useState } from 'react';
 
 
 
-function Home() {
- 
-
-
+function Home() { 
   return (
     <div>
       <Header
