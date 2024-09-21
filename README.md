@@ -8,7 +8,7 @@ The "AI for Social Good Hackathon" is an exciting event where students get toget
 
 ### TEAM NAME
 
-
+Algorithm Avengers
 
 
 ### PROBLEM STATEMENT
