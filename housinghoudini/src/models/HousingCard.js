@@ -1,96 +1,97 @@
-//This is an Object class for our Housingcard Object
 class HousingCard {
-    constructor(title, price, location, bedrooms, bathrooms, pets, descriptions, furnished) {
-        //These are variable that will help the user determine which rental they want
-        this.title = title;
-        this.price = price;
-        this.location = location;
-        this.bedrooms = bedrooms;
-        this.bathrooms = bathrooms;
-        this.pets = pets;
-        this.descriptions = descriptions;
-        this.furnished = furnished;
-        this.img = new Image();
-        this.match = 0.0;
+    constructor(title, price, location, bedrooms, bathrooms, pets, descriptions, furnished, imgUrl) {
+      this.title = title;
+      this.price = price;
+      this.location = location;
+      this.bedrooms = bedrooms;
+      this.bathrooms = bathrooms;
+      this.pets = pets;
+      this.descriptions = descriptions;
+      this.furnished = furnished;
+      this.imgUrl = imgUrl; 
+      this.match = 0.0;
     }
-//With the help of Copilot, I implemneted setters and getters for each attribute
+  
     setTitle(newTitle) {
-        this.title = newTitle;
+      this.title = newTitle;
     }
-
+  
     getTitle() {
-        return this.title;
+      return this.title;
     }
-
+  
     setPrice(newPrice) {
-        this.price = newPrice;
+      this.price = newPrice;
     }
-
+  
     getPrice() {
-        return this.price;
+      return this.price;
     }
-
+  
     setLocation(newLocation) {
-        this.location = newLocation;
+      this.location = newLocation;
     }
-
+  
     getLocation() {
-        return this.location;
+      return this.location;
     }
-
+  
     setBedrooms(newBedrooms) {
-        this.bedrooms = newBedrooms;
+      this.bedrooms = newBedrooms;
     }
-
+  
     getBedrooms() {
-        return this.bedrooms;
+      return this.bedrooms;
     }
-
+  
     setBathrooms(newBathrooms) {
-        this.bathrooms = newBathrooms;
+      this.bathrooms = newBathrooms;
     }
-
+  
     getBathrooms() {
-        return this.bathrooms;
+      return this.bathrooms;
     }
-
+  
     setPets(newPets) {
-        this.pets = newPets;
+      this.pets = newPets;
     }
-
+  
     getPets() {
-        return this.pets;
+      return this.pets;
     }
-
+  
     setDescriptions(newDescriptions) {
-        this.descriptions = newDescriptions;
+      this.descriptions = newDescriptions;
     }
-
+  
     getDescriptions() {
-        return this.descriptions;
+      return this.descriptions;
     }
-
+  
     setFurnished(newFurnished) {
-        this.furnished = newFurnished;
+      this.furnished = newFurnished;
     }
-
+  
     getFurnished() {
-        return this.furnished;
+      return this.furnished;
     }
-
+  
     setMatch(newMatch) {
-        this.match = newMatch;
+      this.match = newMatch;
     }
-
+  
     getMatch() {
-        return this.match;
+      return this.match;
     }
-
-    setImage(src) {
-        this.img.src = src;
+  
+    setImageUrl(newImgUrl) {
+      this.imgUrl = newImgUrl;
     }
-
-    getImage() {
-        return this.img.src;
+  
+    getImageUrl() {
+      return this.imgUrl;
     }
-}
+  }
+  
+  export default HousingCard;
+  
