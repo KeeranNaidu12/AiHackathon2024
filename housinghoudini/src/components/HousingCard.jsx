@@ -3,7 +3,7 @@ import React from "react";
 const housingData = new HousingCard("Cozy Apartment","$1200/month","West Kelowna", 2,1, true, "A cozy apartment in the city.",true);
 
 function HousingCard(){
-return(<div className="housing-data">
+<div className="housing-data">
         <h3>{housingData.getTitle()}</h3>
                 <p>Location: {housingData.getLocation()}</p>
                 <p>Price: {housingData.getPrice()}</p>
@@ -12,6 +12,7 @@ return(<div className="housing-data">
                 <p>Pets Allowed: {housingData.getPets() ? "Yes" : "No"}</p>
                 <p>Description: {housingData.getDescriptions()}</p>
                 <p>Furnished: {housingData.getFurnished() ? "Yes" : "No"}</p>
-        </div>);
+        </div>
 }
+
 export default HousingCard;
