@@ -12,6 +12,7 @@ import { Label } from "@/components/ui/label";
 import SelecterComponent from "./SelecterComponent";
 import Image from "next/image";
 import logo from "@/public/logo.png";
+//import { useRouter } from "next/router";
 
 const labelStyle = {
   fontSize: "1.1rem",
@@ -32,7 +33,9 @@ const textAreaStyle = {
   height: "100px",
 };
 
-function UserDataForm({setApiResults}) {
+function UserDataForm({ setApiResults }) {
+  //const router = useRouter();
+
   const [toggles, setToggles] = useState({
     electricity: false,
     water: false,
@@ -95,8 +98,7 @@ function UserDataForm({setApiResults}) {
       preferences.budget.length > 0 ? preferences.budget : "Not specifified"
     }, \nElectricity: ${preferences.electricity},\nWater: ${
       preferences.water
-    }, \nWifi: ${preferences.wifi}, \nFurnished: ${preferences.furnished},
-    \nOther preferences: ${
+    }, \nWifi: ${preferences.wifi}, \nFurnished: ${preferences.furnished},\nOther preferences: ${
       preferences.other.length > 0 ? preferences.other : "Not specified"
     } `;
     console.log(studentPreferences);
@@ -119,7 +121,7 @@ function UserDataForm({setApiResults}) {
       const results = data.result;
       setApiResults(results);
 
-
+      router.push("/results");
     } catch (error) {
       console.error("Error:", error);
     }
@@ -146,6 +148,7 @@ function UserDataForm({setApiResults}) {
               to the listing to take the next step in applying for that rental!
             </p>
           </div>
+          <hr style={{backgroundColor: "#000"}}/>
         </CardHeader>{" "}
         {/* Added for default padding */}
         <CardContent>
