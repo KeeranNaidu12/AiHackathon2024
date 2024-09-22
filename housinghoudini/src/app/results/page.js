@@ -7,7 +7,7 @@ function Results() {
   return (
     <div>
       <Header />
-      <ResultsOutput housingdata={housingData} />
+      <ResultsOutput housingdata={api} />
       <Footer />
     </div>
   );

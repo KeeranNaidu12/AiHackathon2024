@@ -98,7 +98,9 @@ function UserDataForm({ setApiResults }) {
       preferences.budget.length > 0 ? preferences.budget : "Not specifified"
     }, \nElectricity: ${preferences.electricity},\nWater: ${
       preferences.water
-    }, \nWifi: ${preferences.wifi}, \nFurnished: ${preferences.furnished},\nOther preferences: ${
+    }, \nWifi: ${preferences.wifi}, \nFurnished: ${
+      preferences.furnished
+    },\nOther preferences: ${
       preferences.other.length > 0 ? preferences.other : "Not specified"
     } `;
     console.log(studentPreferences);
@@ -131,24 +133,25 @@ function UserDataForm({ setApiResults }) {
     <div className="flex items-center justify-center">
       <Card className="w-[80%]">
         <CardHeader>
-          <div className="flex items-center justify-center">
+          <div className="flex items-center justify-center gap-4">
             <Image
+             className="p-20px"
               style={{ width: "200px", height: "200px" }}
               src={logo}
               alt="logo"
             />
-            <p>
-              Settle saves time and stress of students who are
-              travelling a long ways for their education by finding the right
-              place to stay for the upcoming academic year in a couple of
-              clicks. It takes their preferences and matches them to listings
-              sourced from websites like Facebook Marketplace and
-              Places4Students, comparing info about the listings to see if they
-              are a good fit. It gives a custom fit rating, summary and a link
-              to the listing to take the next step in applying for that rental!
+            <p className="p-20px text-lg">
+              Settle saves time and stress of students who are travelling long
+              distances for their education by finding the right place to stay
+              for the upcoming academic year in a couple of clicks. It takes
+              their preferences and matches them to listings sourced from
+              websites like Facebook Marketplace and Places4Students. AI
+              compares info about the listings to see if they are a good fit. It
+              gives a custom fit rating, summary and a link to the listing to
+              take the next step in applying for that rental!
             </p>
           </div>
-          <hr style={{backgroundColor: "#000"}}/>
+          <hr style={{ backgroundColor: "#000" }} />
         </CardHeader>{" "}
         {/* Added for default padding */}
         <CardContent>
