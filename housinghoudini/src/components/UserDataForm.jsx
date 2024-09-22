@@ -12,7 +12,9 @@ import { Label } from "@/components/ui/label";
 import SelecterComponent from "./SelecterComponent";
 import Image from "next/image";
 import logo from "@/public/logo.png";
-//import { useRouter } from "next/router";
+import {useRouter} from "next/navigation";
+
+
 
 const labelStyle = {
   fontSize: "1.1rem",
@@ -33,8 +35,8 @@ const textAreaStyle = {
   height: "100px",
 };
 
-function UserDataForm({ setApiResults }) {
-  //const router = useRouter();
+function UserDataForm() {
+  const router = useRouter();
 
   const [toggles, setToggles] = useState({
     electricity: false,
@@ -121,9 +123,11 @@ function UserDataForm({ setApiResults }) {
 
       const data = await res.json();
       const results = data.result;
-      setApiResults(results);
+
+      sessionStorage.setItem("apiResults", JSON.stringify(results));
 
       router.push("/results");
+
     } catch (error) {
       console.error("Error:", error);
     }
