@@ -17,7 +17,7 @@ const footerStyle = { // Temp style
 function Footer() {  
   return (
     <div style={footerStyle}>
-      <p>© Software Name {year}</p>
+      <p>© ResAIdence Finder {year}</p>
       <p>AI for Social Good Hackathon | Algorithm Avengers</p>
     </div>
   );
