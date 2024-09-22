@@ -10,6 +10,8 @@ import {
 } from "@/components/ui/card";
 import { Label } from "@/components/ui/label";
 import SelecterComponent from "./SelecterComponent";
+import Image from "next/image";
+import logo from "@/public/logo.png";
 
 const labelStyle = {
   fontSize: "1.1rem",
@@ -34,6 +36,7 @@ function UserDataForm({setApiResults}) {
   const [toggles, setToggles] = useState({
     electricity: false,
     water: false,
+    furnished: false,
     wifi: false,
   });
 
@@ -43,10 +46,11 @@ function UserDataForm({setApiResults}) {
     roommates: "",
     laundry: "",
     pets: "",
-    gym: "",
+    budget: "",
     electricity: "Electricity/Utilities not Included",
     water: "Water not Included",
     wifi: "Wifi not Included",
+    furnished: "Furnished not Included",
     other: "",
   });
 
@@ -59,7 +63,9 @@ function UserDataForm({setApiResults}) {
 
     setPreferences((prevPreferences) => ({
       ...prevPreferences,
-      [name]: newToggles[name] ? `${name.charAt(0).toUpperCase() + name.slice(1)} Included` : `${name.charAt(0).toUpperCase() + name.slice(1)} not Included`,
+      [name]: newToggles[name]
+        ? `${name.charAt(0).toUpperCase() + name.slice(1)} Included`
+        : `${name.charAt(0).toUpperCase() + name.slice(1)} not Included`,
     }));
   };
 
@@ -71,7 +77,28 @@ function UserDataForm({setApiResults}) {
   };
 
   const handleClick = async () => {
-    const studentPreferences = `Beds: ${preferences.beds.length > 0? preferences.beds : 'Not specifified'}, \nBathrooms: ${preferences.bathrooms.length > 0? preferences.bathrooms : 'Not specifified'}, \nRoommates: ${preferences.roommates.length > 0? preferences.roommates : 'Not specifified'}, \nLaundry: ${preferences.laundry.length > 0? preferences.laundry : 'Not specifified'}, \nPets: ${preferences.pets.length > 0? preferences.pets : 'Not specifified'}, \nGym: ${preferences.gym.length > 0? preferences.gym : 'Not specifified'}, \nElectricity: ${preferences.electricity},\nWater: ${preferences.water}, \nWifi: ${preferences.wifi}, \nOther preferences: ${preferences.other.length > 0? preferences.other : 'Not specified'}`;
+    const studentPreferences = `Beds: ${
+      preferences.beds.length > 0 ? preferences.beds : "Not specifified"
+    }, \nBathrooms: ${
+      preferences.bathrooms.length > 0
+        ? preferences.bathrooms
+        : "Not specifified"
+    }, \nRoommates: ${
+      preferences.roommates.length > 0
+        ? preferences.roommates
+        : "Not specifified"
+    }, \nLaundry: ${
+      preferences.laundry.length > 0 ? preferences.laundry : "Not specifified"
+    }, \nPets: ${
+      preferences.pets.length > 0 ? preferences.pets : "Not specifified"
+    }, \nBudget: ${
+      preferences.budget.length > 0 ? preferences.budget : "Not specifified"
+    }, \nElectricity: ${preferences.electricity},\nWater: ${
+      preferences.water
+    }, \nWifi: ${preferences.wifi}, \nFurnished: ${preferences.furnished},
+    \nOther preferences: ${
+      preferences.other.length > 0 ? preferences.other : "Not specified"
+    } `;
     console.log(studentPreferences);
     const listingDesc =
       "A cozy 2-bedroom apartment with a beautiful view near a movie theatre";
@@ -101,7 +128,26 @@ function UserDataForm({setApiResults}) {
   return (
     <div className="flex items-center justify-center">
       <Card className="w-[80%]">
-        <CardHeader></CardHeader> {/* Added for default padding */}
+        <CardHeader>
+          <div className="flex items-center justify-center">
+            <Image
+              style={{ width: "200px", height: "200px" }}
+              src={logo}
+              alt="logo"
+            />
+            <p>
+              ResAIdence Finder saves time and stress of students who are
+              travelling a long ways for their education by finding the right
+              place to stay for the upcoming academic year in a couple of
+              clicks. It takes their preferences and matches them to listings
+              sourced from websites like Facebook Marketplace and
+              Places4Students, comparing info about the listings to see if they
+              are a good fit. It gives a custom fit rating, summary and a link
+              to the listing to take the next step in applying for that rental!
+            </p>
+          </div>
+        </CardHeader>{" "}
+        {/* Added for default padding */}
         <CardContent>
           <form>
             <div className="grid w-full items-center gap-4">
@@ -128,20 +174,31 @@ function UserDataForm({setApiResults}) {
                   opt3="2"
                   opt4="2.5+"
                 />
+                <Label style={labelStyle} htmlFor="budget">
+                  Budget
+                </Label>
+                <SelecterComponent
+                  handleChange={handleSelectChange("budget")}
+                  id="budget"
+                  opt1="$0-$750"
+                  opt2="$750-$1250"
+                  opt3="$1250-$1750"
+                  opt4="$1750+"
+                />
+              </div>
+
+              <div className="flex flex-row gap-4 items-center">
                 <Label style={labelStyle} htmlFor="roommates">
                   Roommates
                 </Label>
                 <SelecterComponent
                   handleChange={handleSelectChange("roommates")}
                   id="roommates"
-                  opt1="0"
+                  opt1="None"
                   opt2="1"
                   opt3="2"
                   opt4="3+"
                 />
-              </div>
-
-              <div className="flex flex-row gap-4 items-center">
                 <Label style={labelStyle} htmlFor="laundry">
                   Laundry
                 </Label>
@@ -164,23 +221,12 @@ function UserDataForm({setApiResults}) {
                   opt3="Small pets"
                   opt4="None"
                 />
-                <Label style={labelStyle} htmlFor="gym">
-                  Gym
-                </Label>
-                <SelecterComponent
-                  handleChange={handleSelectChange("gym")}
-                  id="gym"
-                  opt1="On-site"
-                  opt2="Nearby"
-                  opt3="None"
-                  opt4="No preference"
-                />
               </div>
 
               <div className="flex gap-4 items-center justify-between w-full">
                 <div className="flex gap-4 items-center w-full">
                   <Label style={labelStyle} htmlFor="utilities">
-                    I want _______ included in rent
+                    Other features included:
                   </Label>
                   <Toggle
                     style={toggles.electricity ? toggleStyleOn : toggleStyleOff}
@@ -203,6 +249,13 @@ function UserDataForm({setApiResults}) {
                   >
                     Wifi
                   </Toggle>
+                  <Toggle
+                    style={toggles.furnished ? toggleStyleOn : toggleStyleOff}
+                    checked={toggles.furnished}
+                    onClick={handleToggleChange("furnished")}
+                  >
+                    Furnished
+                  </Toggle>
                 </div>
                 <div className="flex gap-4 items-center w-full"></div>
               </div>
@@ -215,13 +268,12 @@ function UserDataForm({setApiResults}) {
                   ...prevPreferences,
                   other: e.target.value,
                 }))
-                
               }
             />
           </form>
         </CardContent>
         <CardFooter className="flex justify-center">
-          <Button onClick={handleClick}>Find me a match with AI!</Button>
+          <Button onClick={handleClick}>Match me!</Button>
         </CardFooter>
       </Card>
     </div>
