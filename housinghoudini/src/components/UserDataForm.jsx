@@ -138,7 +138,7 @@ function UserDataForm({ setApiResults }) {
               alt="logo"
             />
             <p>
-              ResAIdence Finder saves time and stress of students who are
+              Settle saves time and stress of students who are
               travelling a long ways for their education by finding the right
               place to stay for the upcoming academic year in a couple of
               clicks. It takes their preferences and matches them to listings
