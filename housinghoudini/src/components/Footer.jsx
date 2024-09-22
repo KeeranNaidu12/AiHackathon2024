@@ -3,18 +3,15 @@ import React from 'react';
 let year = new Date().getFullYear();
 
 const footerStyle = { // Temp style
-  backgroundColor: "blue",
   color: "white", 
   textAlign: "center",
-  position: "fixed",
   display: "flex", 
   flexDirection: "column",
   alignItems: "center", 
   justifyContent: "center",
-  left: "0",
-  bottom: "0",
+  marginTop: "40px",
   width: "100%",
-  height: "15%",
+  height: "100px",
 };
 
 function Footer() {  

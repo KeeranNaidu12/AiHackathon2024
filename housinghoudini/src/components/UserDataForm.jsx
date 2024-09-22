@@ -1,30 +1,50 @@
-import React from "react";
+import React, { useState } from "react";
 import { Button } from "@/components/ui/button";
-import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+import { Textarea } from "@/components/ui/textarea";
+import { Toggle } from "@/components/ui/toggle";
 import {
   Card,
   CardContent,
-  CardDescription,
   CardFooter,
   CardHeader,
-  CardTitle,
 } from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
+import SelecterComponent from "./SelecterComponent";
+import Image from "next/image";
 
 const labelStyle = {
   fontSize: "1.1rem",
   fontWeight: "bold",
 };
 
+const toggleStyleOn = {
+  border: "1px solid #000",
+};
+
+const toggleStyleOff = {
+  border: "1px solid #ccc",
+};
+
+const textAreaStyle = {
+  marginTop: "1em",
+  width: "100%",
+  height: "100px",
+};
+
 function UserDataForm() {
+  const [toggles, setToggles] = useState({
+    electricity: false,
+    water: false,
+    wifi: false,
+  });
+
+  const handleToggleChange = (name) => (event) => {
+    setToggles({
+      ...toggles,
+      [name]: event.target.checked,
+    });
+  };
+  
   const handleClick = async () => {
     const studentPreferences =
       "21, male. Budget: $1200 a month. Prefers furnished room and likes movies";
@@ -54,13 +74,6 @@ function UserDataForm() {
   return (
     <div className="flex items-center justify-center">
       <Card className="w-[80%]">
-        {/* Commented out, will add if feel needed */}
-        {/* <CardHeader>
-          <CardTitle>Edit your </CardTitle>
-          <CardDescription>
-            Deploy your new project in one-click.
-          </CardDescription>
-        </CardHeader> */}
         <CardHeader></CardHeader> {/* Added for default padding */}
         <CardContent>
           <form>
@@ -69,90 +82,106 @@ function UserDataForm() {
                 <Label style={labelStyle} htmlFor="beds">
                   Beds
                 </Label>
-                <Select>
-                  <SelectTrigger id="beds">
-                    <SelectValue placeholder="Select" />
-                  </SelectTrigger>
-                  <SelectContent position="popper">
-                    <SelectItem value="Studio">Studio</SelectItem>
-                    <SelectItem value="1">1</SelectItem>
-                    <SelectItem value="2">2</SelectItem>
-                    <SelectItem value="3">3+</SelectItem>
-                  </SelectContent>
-                </Select>
-
+                <SelecterComponent
+                  id="beds"
+                  opt1="S"
+                  opt2="1"
+                  opt3="2"
+                  opt4="3+"
+                />
                 <Label style={labelStyle} htmlFor="bathrooms">
                   Bathrooms
                 </Label>
-                <Select>
-                  <SelectTrigger id="bathrooms">
-                    <SelectValue placeholder="Select" />
-                  </SelectTrigger>
-                  <SelectContent position="popper">
-                    <SelectItem value="1">1</SelectItem>
-                    <SelectItem value="1.5">1.5</SelectItem>
-                    <SelectItem value="2">2</SelectItem>
-                    <SelectItem value="2.5+">2.5+</SelectItem>
-                  </SelectContent>
-                </Select>
+                <SelecterComponent
+                  id="bathrooms"
+                  opt1="1"
+                  opt2="1.5"
+                  opt3="2"
+                  opt4="2.5+"
+                />
                 <Label style={labelStyle} htmlFor="roommates">
                   Roommates
                 </Label>
-                <Select>
-                  <SelectTrigger id="roommates">
-                    <SelectValue placeholder="Select" />
-                  </SelectTrigger>
-                  <SelectContent position="popper">
-                    <SelectItem value="none">None</SelectItem>
-                    <SelectItem value="1">1</SelectItem>
-                    <SelectItem value="2">2</SelectItem>
-                    <SelectItem value="3">3+</SelectItem>
-                  </SelectContent>
-                </Select>
+                <SelecterComponent
+                  id="roommates"
+                  opt1="0"
+                  opt2="1"
+                  opt3="2"
+                  opt4="3+"
+                />
               </div>
+
+              <div className="flex flex-row gap-4 items-center">
+                <Label style={labelStyle} htmlFor="laundry">
+                  Laundry
+                </Label>
+                <SelecterComponent
+                  id="laundry"
+                  opt1="In-unit"
+                  opt2="On-site-shared"
+                  opt3="Laundromat nearby"
+                  opt4="None"
+                />
+                <Label style={labelStyle} htmlFor="pets">
+                  Pets
+                </Label>
+                <SelecterComponent
+                  id="pets"
+                  opt1="Dog"
+                  opt2="Car"
+                  opt3="Small pets"
+                  opt4="None"
+                />
+                <Label style={labelStyle} htmlFor="gym">
+                  Gym
+                </Label>
+                <SelecterComponent
+                  id="gym"
+                  opt1="On-site"
+                  opt2="Nearby"
+                  opt3="None"
+                  opt4="No preference"
+                />
+              </div>
+
               <div className="flex gap-4 items-center justify-between w-full">
-                <div className="flex flex-row gap-10">
-                  <Label style={labelStyle} htmlFor="Parking">
-                    Parking
+                <div className="flex gap-4 items-center w-full">
+                  <Label style={labelStyle} htmlFor="utilities">
+                    I want _______ included in rent
                   </Label>
-                  <RadioGroup defaultValue="yes">
-                    <div className="flex items-center space-x-2">
-                      <RadioGroupItem value="yes" id="yes" />
-                      <Label htmlFor="yes">Yes</Label>
-                      <RadioGroupItem value="no" id="no" />
-                      <Label htmlFor="no">No</Label>
-                      <RadioGroupItem
-                        value="no-preference"
-                        id="no-preference"
-                      />
-                      <Label htmlFor="no-preference">No Preference</Label>
-                    </div>
-                  </RadioGroup>
+                  <Toggle
+                    style={toggles.electricity ? toggleStyleOn : toggleStyleOff}
+                    checked={toggles.electricity}
+                    onChange={handleToggleChange("electricity")}
+                  >
+                    Electricity
+                  </Toggle>
+                  <Toggle
+                    style={toggles.water ? toggleStyleOn : toggleStyleOff}
+                    checked={toggles.water}
+                    onChange={handleToggleChange("water")}
+                  >
+                    Water
+                  </Toggle>
+                  <Toggle
+                    style={toggles.wifi ? toggleStyleOn : toggleStyleOff}
+                    checked={toggles.wifi}
+                    onChange={handleToggleChange("wifi")}
+                  >
+                    Wifi
+                  </Toggle>
                 </div>
-                <div className="flex flex-row gap-10">
-                  <Label style={labelStyle} htmlFor="Furnished">
-                    Furnished
-                  </Label>
-                  <RadioGroup defaultValue="yes">
-                    <div className="flex items-center space-x-2">
-                      <RadioGroupItem value="yes" id="yes" />
-                      <Label htmlFor="yes">Yes</Label>
-                      <RadioGroupItem value="no" id="no" />
-                      <Label htmlFor="no">No</Label>
-                      <RadioGroupItem
-                        value="no-preference"
-                        id="no-preference"
-                      />
-                      <Label htmlFor="no-preference">No Preference</Label>
-                    </div>
-                  </RadioGroup>
-                </div>
+                <div className="flex gap-4 items-center w-full"></div>
               </div>
             </div>
+            <Textarea
+              style={textAreaStyle}
+              placeholder="Enter any other keywords... (Female roommate, bus route, etc.)"
+            />
           </form>
         </CardContent>
         <CardFooter className="flex justify-center">
-          <Button onClick={handleClick}>Show me some bedder rentals!</Button>
+          <Button onClick={handleClick}>Find me a match with AI!</Button>
         </CardFooter>
       </Card>
     </div>
