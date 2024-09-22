@@ -10,7 +10,6 @@ import {
 } from "@/components/ui/card";
 import { Label } from "@/components/ui/label";
 import SelecterComponent from "./SelecterComponent";
-import Image from "next/image";
 
 const labelStyle = {
   fontSize: "1.1rem",
@@ -38,16 +37,42 @@ function UserDataForm() {
     wifi: false,
   });
 
+  const [preferences, setPreferences] = useState({
+    beds: "",
+    bathrooms: "",
+    roommates: "",
+    laundry: "",
+    pets: "",
+    gym: "",
+    electricity: "Electricity/Utilities not Included",
+    water: "Water not Included",
+    wifi: "Wifi not Included",
+    other: "",
+  });
+
   const handleToggleChange = (name) => (event) => {
-    setToggles({
+    const newToggles = {
       ...toggles,
-      [name]: event.target.checked,
-    });
+      [name]: !toggles[name], // Correctly invert the value
+    };
+    setToggles(newToggles);
+
+    setPreferences((prevPreferences) => ({
+      ...prevPreferences,
+      [name]: newToggles[name] ? `${name.charAt(0).toUpperCase() + name.slice(1)} Included` : `${name.charAt(0).toUpperCase() + name.slice(1)} not Included`,
+    }));
   };
-  
+
+  const handleSelectChange = (name) => (value) => {
+    setPreferences((prevPreferences) => ({
+      ...prevPreferences,
+      [name]: value,
+    }));
+  };
+
   const handleClick = async () => {
-    const studentPreferences =
-      "21, male. Budget: $1200 a month. Prefers furnished room and likes movies";
+    const studentPreferences = `Beds: ${preferences.beds.length > 0? preferences.beds : 'Not specifified'}, \nBathrooms: ${preferences.bathrooms.length > 0? preferences.bathrooms : 'Not specifified'}, \nRoommates: ${preferences.roommates.length > 0? preferences.roommates : 'Not specifified'}, \nLaundry: ${preferences.laundry.length > 0? preferences.laundry : 'Not specifified'}, \nPets: ${preferences.pets.length > 0? preferences.pets : 'Not specifified'}, \nGym: ${preferences.gym.length > 0? preferences.gym : 'Not specifified'}, \nElectricity: ${preferences.electricity},\nWater: ${preferences.water}, \nWifi: ${preferences.wifi}, \nOther preferences: ${preferences.other.length > 0? preferences.other : 'Not specified'}`;
+    console.log(studentPreferences);
     const listingDesc =
       "A cozy 2-bedroom apartment with a beautiful view near a movie theatre";
 
@@ -68,7 +93,6 @@ function UserDataForm() {
     } catch (error) {
       console.error("Error:", error);
     }
-    console.log("Button clicked");
   };
 
   return (
@@ -83,8 +107,9 @@ function UserDataForm() {
                   Beds
                 </Label>
                 <SelecterComponent
+                  handleChange={handleSelectChange("beds")}
                   id="beds"
-                  opt1="S"
+                  opt1="Studio/Suite"
                   opt2="1"
                   opt3="2"
                   opt4="3+"
@@ -93,6 +118,7 @@ function UserDataForm() {
                   Bathrooms
                 </Label>
                 <SelecterComponent
+                  handleChange={handleSelectChange("bathrooms")}
                   id="bathrooms"
                   opt1="1"
                   opt2="1.5"
@@ -103,6 +129,7 @@ function UserDataForm() {
                   Roommates
                 </Label>
                 <SelecterComponent
+                  handleChange={handleSelectChange("roommates")}
                   id="roommates"
                   opt1="0"
                   opt2="1"
@@ -116,6 +143,7 @@ function UserDataForm() {
                   Laundry
                 </Label>
                 <SelecterComponent
+                  handleChange={handleSelectChange("laundry")}
                   id="laundry"
                   opt1="In-unit"
                   opt2="On-site-shared"
@@ -126,9 +154,10 @@ function UserDataForm() {
                   Pets
                 </Label>
                 <SelecterComponent
+                  handleChange={handleSelectChange("pets")}
                   id="pets"
                   opt1="Dog"
-                  opt2="Car"
+                  opt2="Cat"
                   opt3="Small pets"
                   opt4="None"
                 />
@@ -136,6 +165,7 @@ function UserDataForm() {
                   Gym
                 </Label>
                 <SelecterComponent
+                  handleChange={handleSelectChange("gym")}
                   id="gym"
                   opt1="On-site"
                   opt2="Nearby"
@@ -152,21 +182,21 @@ function UserDataForm() {
                   <Toggle
                     style={toggles.electricity ? toggleStyleOn : toggleStyleOff}
                     checked={toggles.electricity}
-                    onChange={handleToggleChange("electricity")}
+                    onClick={handleToggleChange("electricity")}
                   >
                     Electricity
                   </Toggle>
                   <Toggle
                     style={toggles.water ? toggleStyleOn : toggleStyleOff}
                     checked={toggles.water}
-                    onChange={handleToggleChange("water")}
+                    onClick={handleToggleChange("water")}
                   >
                     Water
                   </Toggle>
                   <Toggle
                     style={toggles.wifi ? toggleStyleOn : toggleStyleOff}
                     checked={toggles.wifi}
-                    onChange={handleToggleChange("wifi")}
+                    onClick={handleToggleChange("wifi")}
                   >
                     Wifi
                   </Toggle>
@@ -177,6 +207,13 @@ function UserDataForm() {
             <Textarea
               style={textAreaStyle}
               placeholder="Enter any other keywords... (Female roommate, bus route, etc.)"
+              onChange={(e) =>
+                setPreferences((prevPreferences) => ({
+                  ...prevPreferences,
+                  other: e.target.value,
+                }))
+                
+              }
             />
           </form>
         </CardContent>
