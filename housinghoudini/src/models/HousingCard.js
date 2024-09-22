@@ -91,7 +91,12 @@ class HousingCard {
     getImageUrl() {
       return this.imgUrl;
     }
-  }
-  
-  export default HousingCard;
-  
+
+    setLaundry(laundry){
+        this.laundry = laundry;
+    }
+
+    getLaundry(){
+        return this.laundry;
+    }
+}
