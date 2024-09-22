@@ -9,7 +9,7 @@ import {
 
 export default function SelecterComponent(props) {
   return (
-    <Select>
+    <Select onValueChange={props.handleChange}>
       <SelectTrigger id={props.id}>
         <SelectValue placeholder="Select" />
       </SelectTrigger>
