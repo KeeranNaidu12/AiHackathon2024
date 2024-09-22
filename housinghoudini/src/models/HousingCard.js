@@ -100,3 +100,5 @@ class HousingCard {
         return this.laundry;
     }
 }
+
+export default HousingCard;

@@ -32,7 +32,7 @@ const textAreaStyle = {
   height: "100px",
 };
 
-function UserDataForm() {
+function UserDataForm({setApiResults}) {
   const [toggles, setToggles] = useState({
     electricity: false,
     water: false,
@@ -116,7 +116,10 @@ function UserDataForm() {
       });
 
       const data = await res.json();
-      // TODO: pass to results pages
+      const results = data.result;
+      setApiResults(results);
+
+
     } catch (error) {
       console.error("Error:", error);
     }
